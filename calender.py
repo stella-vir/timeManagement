@@ -1,3 +1,5 @@
+# git create repo pages
+# curl -u 'stella-vir' https://api.github.com/user/repos -d '{"name":"timeManagement"}'
 
 class Calender:
     def __init__(self):
