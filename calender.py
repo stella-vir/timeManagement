@@ -10,8 +10,9 @@ end_time = ['13:15', '16:30', '20:00']
 
 class Calender:
 
-    def __init__(self):
+    def __init__(self, max_size):
         self.schedules = []
+        self.max_size = max_size
         # self.schedules = {
         #     weeks: weeks,
         #     week_days: week_days,
@@ -20,6 +21,8 @@ class Calender:
         # }
 
     def add(self, schedule):
+        if self.size() == self.max_size:
+            raise OverflowError('Reached max size')
         self.schedules.append(schedule)
 
     def size(self):
@@ -28,5 +31,13 @@ class Calender:
     def get_schedules(self):
         return self.schedules
 
-    def get_gross_income(self):
-        pass
+    def get_timing(self, timing_map):
+        timing = []
+        for s in self.schedules:
+            # dict income_map[s] get()
+            timing.append(timing_map.get(s))
+        return timing
+
+
+
+# end
