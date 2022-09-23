@@ -3,11 +3,6 @@
 # password: Personal access tokens
 # repo url: https://github.com/stella-vir/timeManagement
 
-weeks = [0, 1],
-week_days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-start_time = ['4:45', '9:00', '12:30'],
-end_time = ['13:15', '16:30', '20:00']
-
 class Calender:
 
     def __init__(self, max_size):
@@ -19,6 +14,9 @@ class Calender:
         #     start_time: start_time,
         #     end_time: end_time
         # }
+
+    # def __str__(self):
+    #     return self.schedules
 
     def add(self, schedule):
         if self.size() == self.max_size:
@@ -33,10 +31,27 @@ class Calender:
 
     def get_timing(self, timing_map):
         timing = []
-        for s in self.schedules:
-            # dict income_map[s] get()
-            timing.append(timing_map.get(s))
+        # [('Mon', '5:45'), ('Mon', '9:00')]
+
+        for sch in self.schedules:
+            for t in timing_map:
+                print('t', t)
+                _, ti = t
+                timing.append(ti)
         return timing
+
+    def get_date(self, date_map):
+        date = []
+
+        for s in self.schedules:
+            # dict timing_map[s] timing_map.get(s)
+            date.append(date_map.get(s))
+        return date
+
+
+
+
+
 
 
 
