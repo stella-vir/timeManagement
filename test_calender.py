@@ -4,6 +4,8 @@ import pytest
 from unittest.mock import MagicMock
 import itertools
 
+# >> pytest -s
+# to print all the elements
 
 # week_days = {
 #    weeks: weeks[0]
@@ -63,21 +65,36 @@ def test_can_get_timing(s):
     # }
     # timing_map['Tue'] = '5:45'
 
-    timing_map = list(itertools.product(week_days, start_time))
 
-    print('timing_map', type(timing_map), timing_map)
+    # [('Mon', '5:45'), ('Mon', '9:00'),
+    # itertools to get all the combs 
+    timing_map = list(itertools.product(week_days, start_time))
+    # timing_map = zip(week_days, start_time)
+
+    # {'Mon': '5:45', 'Tue': '9:00
+    # timing_map = dict(zip(week_days, start_time))
+    print(timing_map)
 
     schedule_database = ScheduleDatabase()
     # schedule_database.get_timing = MagicMock(return_value = ['5:45', '9:00'])
 
-    def mock_get_timing(schedule):
-        if schedule == 'Tue':
-            return '5:45'
-        if schedule == 'Sat':
-            return '9:00'
+    def mock_get_timings(schedule):
+        timings = []
+
+        # if schedule == 'Tue':
+        #     return '5:45'
+        # if schedule == 'Sat':
+        #     return '9:00'
+        for t in timing_map:
+            # print('t', t)
+            sch, ti = t
+            if schedule == sch:
+                timings.append(ti)
+        print('timings', timings, type(timings))
+        return timings
         print('schedule, timing', schedule, s.get_timing(schedule_database))
 
-    # schedule_database.get_timing = MagicMock(side_effect = mock_get_timing)
+    schedule_database.get_timings = MagicMock(side_effect = mock_get_timings)
 
     assert '9:00' in s.get_timing(timing_map)
     # assert '9:00' in s.get_timing(schedule_database)

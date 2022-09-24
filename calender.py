@@ -31,20 +31,23 @@ class Calender:
 
     def get_timing(self, timing_map):
         timing = []
-        # [('Mon', '5:45'), ('Mon', '9:00')]
 
-        for sch in self.schedules:
-            for t in timing_map:
-                print('t', t)
-                _, ti = t
-                timing.append(ti)
+        # [('Mon', '5:45'), ('Mon', '9:00')]
+        for s in self.schedules:
+            # tuple
+            for sch, t in timing_map:
+                #  _, t = timing
+                if s == sch:
+                    timing.append(t)
+                    print('map', sch, t)
+
         return timing
 
     def get_date(self, date_map):
         date = []
 
         for s in self.schedules:
-            # dict timing_map[s] timing_map.get(s)
+            # dict timing_map[s] == timing_map.get(s)
             date.append(date_map.get(s))
         return date
 
